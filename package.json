@@ -1,0 +1,32 @@
+{
+  "name": "pasteurl",
+  "version": "0.1.0",
+  "description": "paste files, text, or images to a short url",
+  "main": "index.js",
+  "scripts": {
+    "test": "npx mocha --exit"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/micarlise/pasteUrl.git"
+  },
+  "author": "M Carlise <micarlise@gmail.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/micarlise/pasteUrl/issues"
+  },
+  "homepage": "https://github.com/micarlise/pasteUrl#readme",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "cassandra-driver": "^4.6.1",
+    "express": "^4.17.1",
+    "keygen": "github:micarlise/keygen",
+    "morgan": "^1.10.0"
+  },
+  "devDependencies": {
+    "expect.js": "^0.3.1",
+    "mocha": "^8.3.0",
+    "nodemon": "^2.0.7",
+    "supertest": "^6.1.3"
+  }
+}
