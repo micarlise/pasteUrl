@@ -21,7 +21,9 @@
     "cassandra-driver": "^4.6.1",
     "express": "^4.17.1",
     "keygen": "github:micarlise/keygen",
-    "morgan": "^1.10.0"
+    "morgan": "^1.10.0",
+    "multer": "^1.4.2",
+    "path": "^0.12.7"
   },
   "devDependencies": {
     "expect.js": "^0.3.1",
