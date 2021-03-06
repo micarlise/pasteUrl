@@ -9,10 +9,17 @@ app.use('/', pasteRouter);
 
 describe('API', function() {
 
-    it('POST /', function(done) {
+    it('POST / 200', function(done) {
         request(app)
             .post('/')
-            .expect(200, done)
+            .attach('paste', 'test/fixtures/testfile')
+            .expect(201, done)
+    });
+    
+    it('POST / 400', function(done) {
+        request(app)
+            .post('/')
+            .expect(400, done)
     });
 
     it('GET /', function(done) {

@@ -1,19 +1,29 @@
 const express = require('express');
+
 const keygen = require('keygen');
+const path = require('path');
+
 const bodyParser = require('body-parser');
+const multer = require('multer');
 
 const pasteModel = require('../models/paste');
 
 function insertPaste(req, res) {
-    promises = [];
-    promises.push(keygen(8));
-    promises.push(keygen(64));
 
-    Promise.all(promises)
-    .then(keys => {
-        pasteModel.insertPaste(keys[0], keys[1])
+    if (!req.file || !req.file.filename) {
+        res.status(400);
+        res.end();
+        return;
+    }
+
+    let contentKey = req.file.filename;
+
+    keygen(8)
+    .then(key => {
+        pasteModel.insertPaste(key, contentKey)
         .then(() => {
-            res.send(keys[0])
+            res.status(201);
+            res.send(key);
         })
     });
 }
@@ -25,14 +35,21 @@ function getPaste(req, res) {
         if (contentkey) {
             res.send(contentkey);
         } else {
+            res.status(404);
             res.end();
         }
     });
 }
 
+let upload = multer({dest: path.join(__dirname, '../uploads') });
+
 router = express.Router();
 
 router.get('/:paste', getPaste);
-router.post('/', bodyParser.json(), insertPaste);
+router.post('/', 
+    bodyParser.json(), 
+    upload.single('paste'),
+    insertPaste
+);
 
 module.exports = router
