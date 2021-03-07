@@ -23,7 +23,7 @@ function insertPaste(req, res) {
         pasteModel.insertPaste(key, contentKey)
         .then(() => {
             res.status(201);
-            res.send(key);
+            res.send(key + '\n');
         })
     });
 }
@@ -33,7 +33,8 @@ function getPaste(req, res) {
     pasteModel.getPaste(req.params.paste)
     .then((contentkey) => {
         if (contentkey) {
-            res.send(contentkey);
+            let pathPrefix = path.join(__dirname, '../uploads');
+            res.download(pathPrefix + '/' + contentkey);
         } else {
             res.status(404);
             res.end();
